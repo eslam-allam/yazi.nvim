@@ -36,7 +36,7 @@ return {
 
     -- example data:
     -- Yazi 0.3.1 (4112bf4 2024-08-15)
-    local raw_version = vim.fn.system("yazi --version")
+    local raw_version = vim.system({ "yazi", "--version" }, {text = true}):wait().stdout
 
     -- parse the version
     --
@@ -75,7 +75,7 @@ return {
 
     -- example data:
     -- Ya 0.3.1 (4112bf4 2024-08-15)
-    local raw_ya_version = vim.fn.system("ya --version") or ""
+    local raw_ya_version = vim.system({ "ya", "--version" }, {text = true}):wait().stdout or ""
     local ya_semver = raw_ya_version:match("[Yy]a (%w+%.%w+%.%w+)")
     if ya_semver == nil then
       vim.health.warn(
